@@ -2,6 +2,8 @@
 
 This document describes the platform implementation in a simple execution order.
 
+It is the main planning document for delivery and can also be used as the source when creating GitHub Issues or milestones.
+
 ---
 
 ## Step 1 — Build the base infrastructure

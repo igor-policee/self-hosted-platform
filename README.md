@@ -107,7 +107,6 @@ This platform is designed to demonstrate:
 
 - [Architecture](docs/architecture.md)
 - [Implementation Plan](docs/implementation-plan.md)
-- [GitHub Issues Plan](docs/github-issues-plan.md)
 
 ## Repository Scope
 
