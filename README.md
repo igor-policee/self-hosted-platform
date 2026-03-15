@@ -20,7 +20,7 @@ This platform is designed to demonstrate:
 - Secrets management with HashiCorp Vault
 - Observability with Prometheus, Loki, Grafana, and Hubble
 - Stateful services with PostgreSQL, Redis, and NATS JetStream
-- CI with external GitLab CI and source of truth in GitHub
+- CI with external GitLab CI and an in-cluster GitLab Runner
 
 ## High-Level Architecture
 
@@ -35,13 +35,13 @@ This platform is designed to demonstrate:
 - **Application runtime:** frontend, api, worker
 - **Data layer:** PostgreSQL, Redis
 - **Messaging:** NATS JetStream
+- **Self-hosted GitLab Runner:** Kubernetes deployment
 - **External systems:** GitHub, GitLab CI, container registry
 
 ## VM Topology
 
 | VM | Role |
 |---|---|
-| `gitlab-runner` | Self-hosted runner for external GitLab CI |
 | `k8s-cp1` | Kubernetes control plane |
 | `k8s-w1` | Kubernetes worker |
 | `k8s-w2` | Kubernetes worker |
@@ -51,6 +51,7 @@ This platform is designed to demonstrate:
 | Namespace | Purpose |
 |---|---|
 | `platform` | Argo CD, Prometheus, Grafana, Loki, Alertmanager, cert-manager |
+| `ci` | GitLab Runner |
 | `security` | Vault |
 | `messaging` | NATS JetStream |
 | `data` | PostgreSQL, Redis |
@@ -61,7 +62,6 @@ This platform is designed to demonstrate:
 | Component | Location |
 |---|---|
 | Proxmox VE | Bare-metal server |
-| gitlab-runner | Proxmox VM |
 | k8s-cp1 | Proxmox VM |
 | k8s-w1 | Proxmox VM |
 | k8s-w2 | Proxmox VM |
@@ -71,6 +71,7 @@ This platform is designed to demonstrate:
 | GitOps repository | GitHub |
 | GitLab CI | External SaaS |
 | Container registry | External registry |
+| gitlab-runner | Kubernetes |
 | Argo CD | Kubernetes |
 | Cilium | Kubernetes |
 | Gateway API | Kubernetes |
@@ -89,10 +90,11 @@ This platform is designed to demonstrate:
 ## Delivery Flow
 
 1. Code lives in GitHub
-2. GitLab CI runs lint, tests, image build, and security checks
-3. CI pushes images to the container registry
-4. CI updates the GitOps manifests repository
-5. Argo CD syncs changes into Kubernetes
+2. GitLab CI schedules jobs onto the self-hosted GitLab Runner in Kubernetes
+3. The runner executes lint, tests, image build, and security checks
+4. CI pushes images to the container registry
+5. CI updates the GitOps manifests repository
+6. Argo CD syncs changes into Kubernetes
 
 ## Application Flow
 

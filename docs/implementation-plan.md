@@ -41,7 +41,6 @@ Main component locations:
 At this step, we create the virtual machines required by the platform.
 
 We build:
-- [ ] `gitlab-runner`
 - [ ] `k8s-cp1`
 - [ ] `k8s-w1`
 - [ ] `k8s-w2`
@@ -177,14 +176,14 @@ At this step, we automate build and delivery.
 
 We build:
 - [ ] GitLab CI pipeline
-- [ ] Self-hosted GitLab Runner
+- [ ] Self-hosted GitLab Runner deployment inside Kubernetes
 - [ ] Container image build and push workflow
 - [ ] GitOps repository update workflow
 
 Main component locations:
 - **Source code** → GitHub
 - **CI orchestration** → GitLab CI
-- **GitLab Runner** → `gitlab-runner` VM
+- **GitLab Runner** → Kubernetes
 - **Container images** → container registry
 
 ---

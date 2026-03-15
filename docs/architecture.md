@@ -38,13 +38,14 @@ The infrastructure runs on a single physical server.
 - **Purpose:** virtualization layer for all platform virtual machines
 
 ### Virtual Machines
-- **gitlab-runner** — self-hosted runner used by external GitLab CI
 - **k8s-cp1** — Kubernetes control plane node
 - **k8s-w1** — Kubernetes worker node
 - **k8s-w2** — Kubernetes worker node
 
 Terraform is used to provision the virtual machines in Proxmox.  
 Ansible is used to configure the operating systems and prepare the Kubernetes nodes.
+
+The self-hosted GitLab Runner is deployed inside Kubernetes after the cluster is available, not as a standalone VM.
 
 ## Kubernetes Layer
 
@@ -53,13 +54,14 @@ The runtime platform is a kubeadm-based Kubernetes cluster with:
 - **1 control plane**
 - **2 worker nodes**
 
-The cluster hosts both platform services and application workloads.
+The cluster hosts platform services, CI runner workloads, and application workloads.
 
 ### Namespace Layout
 
 | Namespace | Purpose |
 |---|---|
 | `platform` | Argo CD, Prometheus, Grafana, Loki, Alertmanager, cert-manager |
+| `ci` | GitLab Runner |
 | `security` | Vault |
 | `messaging` | NATS JetStream |
 | `data` | PostgreSQL, Redis |
@@ -105,7 +107,7 @@ Continuous Integration is performed with **GitLab CI (SaaS)**.
 
 ### Components
 - **GitLab CI** — pipeline orchestration
-- **gitlab-runner VM** — self-hosted runner inside the platform infrastructure
+- **GitLab Runner deployment in Kubernetes** — self-hosted runner for GitLab CI jobs
 - **Container registry** — stores built images
 
 ### Responsibilities
@@ -114,6 +116,8 @@ Continuous Integration is performed with **GitLab CI (SaaS)**.
 - run security checks
 - push images to the registry
 - update GitOps manifests
+
+GitLab CI orchestrates the pipelines, while the runner executes jobs from inside the Kubernetes cluster.
 
 The CI pipeline does not deploy directly to Kubernetes.  
 Deployment is performed indirectly through GitOps.
@@ -184,7 +188,7 @@ The full delivery flow is:
 
 1. Developer pushes code to GitHub
 2. GitLab CI starts a pipeline
-3. The self-hosted GitLab Runner executes the jobs
+3. The self-hosted GitLab Runner deployment inside Kubernetes executes the jobs
 4. A new container image is built and pushed to the registry
 5. The GitOps repository is updated with the new image version
 6. Argo CD detects the change
