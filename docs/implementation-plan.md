@@ -19,6 +19,10 @@ Main component locations:
 - **Proxmox VE** → bare-metal server
 - **VM template** → Proxmox
 
+Implementation notes:
+- The initial network baseline uses a single public host IP and a private Proxmox bridge for Kubernetes VMs
+- See [Base Infrastructure](base-infrastructure.md) for the current Step 1 network and addressing model
+
 ---
 
 ## Step 2 — Build the infrastructure automation

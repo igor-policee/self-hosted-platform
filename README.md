@@ -108,6 +108,7 @@ This platform is designed to demonstrate:
 ## Documentation
 
 - [Architecture](docs/architecture.md)
+- [Base Infrastructure](docs/base-infrastructure.md)
 - [Implementation Plan](docs/implementation-plan.md)
 
 ## Repository Scope
