@@ -1,6 +1,6 @@
 # GitHub Issues Plan
 
-This document defines the recommended high-level GitHub Issues for implementing the Homelab DevOps Platform.
+This document defines the recommended high-level GitHub Issues for implementing the Self-Hosted DevOps Platform.
 
 ---
 

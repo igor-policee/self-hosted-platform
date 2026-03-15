@@ -1,10 +1,10 @@
-# Homelab DevOps Platform
+# Self-Hosted DevOps Platform
 
 Production-style self-hosted DevOps platform running on a single bare-metal server with **Proxmox VE** as the virtualization layer.
 
 ## Overview
 
-This project is a portfolio-grade homelab platform designed to demonstrate modern DevOps and Platform Engineering practices in a self-hosted environment.
+This project is a portfolio-grade self-hosted platform designed to demonstrate modern DevOps and Platform Engineering practices on dedicated infrastructure.
 
 The platform combines infrastructure automation, Kubernetes operations, GitOps delivery, secrets management, observability, and stateful services into a single cohesive system.
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Homelab DevOps Platform is a production-style self-hosted platform built on a single bare-metal server using **Proxmox VE** as the virtualization layer.
+The Self-Hosted DevOps Platform is a production-style platform built on a single bare-metal server using **Proxmox VE** as the virtualization layer.
 
 The platform is designed to demonstrate a complete delivery and runtime workflow, including:
 
@@ -105,7 +105,7 @@ Continuous Integration is performed with **GitLab CI (SaaS)**.
 
 ### Components
 - **GitLab CI** — pipeline orchestration
-- **gitlab-runner VM** — self-hosted runner inside the homelab
+- **gitlab-runner VM** — self-hosted runner inside the platform infrastructure
 - **Container registry** — stores built images
 
 ### Responsibilities
@@ -195,4 +195,4 @@ The full delivery flow is:
 
 This repository documents the platform architecture, delivery model, and implementation planning.
 
-It serves as the top-level documentation layer for the overall homelab platform.
+It serves as the top-level documentation layer for the overall self-hosted platform.
