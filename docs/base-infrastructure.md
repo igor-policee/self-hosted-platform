@@ -52,8 +52,28 @@ Shared VM network settings:
 - Kubernetes API can later be exposed through the Proxmox host public IP and TCP forwarding to `k8s-cp1:6443`
 - Application traffic can later be exposed through the same public IP with Kubernetes gateway listeners on `80/443`
 
-## Remaining Step 1 Work
+## VM Template Baseline
 
-- Prepare a reusable cloud-init VM template in Proxmox
-- Confirm the guest operating system choice for Kubernetes nodes
-- Record the template name and image source for later Terraform inputs
+- Template VMID: `9000`
+- Template name: `debian-12-bookworm-cloudinit`
+- Guest OS baseline: Debian 12 Bookworm generic cloud image
+- Source image URL: `https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-generic-amd64.qcow2`
+- Template network bridge: `vmbr1`
+- Default cloud-init user: `devops`
+
+The template is intended for cloning the Kubernetes control plane and worker nodes during later Terraform provisioning.
+
+## Step 1 Completion Status
+
+Step 1 is complete for the current platform baseline.
+
+Delivered outcomes:
+
+- Proxmox VE host prepared and reachable
+- SSH hardening applied for key-based administration
+- Separate Proxmox Web UI and Terraform automation identities created
+- Private Kubernetes VM network established on `vmbr1`
+- Host-side NAT enabled for `10.20.0.0/24`
+- Reusable Debian 12 cloud-init VM template prepared as `debian-12-bookworm-cloudinit`
+
+The next implementation step is Step 2, where the Terraform automation layer will be rebuilt against this baseline.

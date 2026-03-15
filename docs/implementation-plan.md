@@ -11,9 +11,9 @@ It is the main planning document for delivery and can also be used as the source
 At this step, we prepare the environment where the platform will run.
 
 We build:
-- [ ] Proxmox VE on the bare-metal server
-- [ ] Base networking and storage
-- [ ] VM template for future provisioning
+- [x] Proxmox VE on the bare-metal server
+- [x] Base networking and storage
+- [x] VM template for future provisioning
 
 Main component locations:
 - **Proxmox VE** → bare-metal server
@@ -212,7 +212,7 @@ Main component locations:
 
 ## Recommended Execution Order
 
-- [ ] Build the base infrastructure
+- [x] Build the base infrastructure
 - [ ] Build the infrastructure automation
 - [ ] Provision the core virtual machines
 - [ ] Build the configuration automation
