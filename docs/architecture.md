@@ -71,6 +71,8 @@ The cluster hosts platform services, CI runner workloads, and application worklo
 
 The Kubernetes networking stack is based on **Cilium**.
 
+At the infrastructure layer, the initial deployment assumes a single public IP on the Proxmox host. Kubernetes nodes live on a private Proxmox bridge behind NAT, and external access is published through the host as controlled port forwarding or gateway exposure.
+
 ### Main components
 - **Cilium CNI** — cluster networking
 - **Gateway API** — north-south traffic entry point
@@ -82,6 +84,13 @@ External traffic enters the platform through the Kubernetes gateway and is route
 Example flow:
 
 `User → Gateway → frontend → api`
+
+### External access model
+
+- Proxmox host keeps the public IP address
+- Kubernetes nodes use a private subnet on a dedicated Proxmox bridge
+- future external `kubectl` access can be exposed through the host public IP and TCP forwarding to the control plane
+- future application access can be exposed through the same public IP and Kubernetes gateway listeners on `80/443`
 
 ## GitOps Layer
 
