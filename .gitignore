@@ -45,3 +45,7 @@ docs/context-handoff.md
 *.p12
 *.kubeconfig
 secrets/
+
+# TerraShark
+.terrashark/
+AGENTS.md
